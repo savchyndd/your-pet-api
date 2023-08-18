@@ -1,0 +1,18 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1",
+    "title": "Your pet API",
+    "description": "This is API for selling pets, adding them to favorites, describing your pet, etc.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "servers": [{ "url": "https://your-pet-shw3.onrender.com" }],
+  "tags": [],
+  "paths": {},
+  "components": {}
+}
