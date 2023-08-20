@@ -7,6 +7,10 @@ const { SEX, CATEGORY } = require("../constants/noticeConstants");
 const isHasRequireCategory = require("../utils/isHasRequireCategory");
 
 const noticeSchema = new Schema({
+  title: {
+    type: String,
+    required: [true, "title is required"],
+  },
   name: {
     type: String,
     match: NAME_REGEX,
@@ -52,9 +56,9 @@ const noticeSchema = new Schema({
     default: CATEGORY[0],
     required: [true, "category is required"],
   },
-  owner: {
-    type: String,
-    default: "",
+  ownerId: {
+    type: Schema.Types.ObjectId,
+    ref: "users",
   },
 });
 

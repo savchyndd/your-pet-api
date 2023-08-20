@@ -1,23 +1,48 @@
 // const { httpError } = require("../../helpers");
+const { CATEGORY_FOR_PARAMS } = require("../../constants/noticeConstants");
 const { Notice } = require("../../models");
 
 const getNotices = async (req, res) => {
-  console.log(req);
   const searchParams = {};
 
-  const { page = 1, limit = 20, favorite } = req.query;
+  const {
+    page = 1,
+    limit = 20,
+    NoticesCategoriesNav = "sell",
+    NoticesSearch,
+  } = req.query;
   const skip = (page - 1) * limit;
 
-  if (typeof favorite === "undefined") {
-    delete searchParams.favorite;
+  if (typeof NoticesSearch === "undefined") {
+    searchParams.NoticesSearch = "";
   } else {
-    searchParams.favorite = favorite;
+    searchParams.NoticesSearch = NoticesSearch;
   }
 
-  const notices = await Notice.find(searchParams, "-createdAt -updatedAt", {
-    skip,
-    limit,
-  });
+  if (!CATEGORY_FOR_PARAMS.includes(NoticesCategoriesNav)) {
+    searchParams.NoticesCategoriesNav = "sell";
+  } else {
+    searchParams.NoticesCategoriesNav =
+      NoticesCategoriesNav === "lost-found"
+        ? NoticesCategoriesNav.replaceAll("-", "/")
+        : NoticesCategoriesNav.replaceAll("-", " ");
+  }
+
+  console.log(searchParams);
+  const notices = await Notice.find(
+    {
+      category: `${searchParams.NoticesCategoriesNav}`,
+      title: {
+        $regex: `${searchParams.NoticesSearch}`,
+        $options: "i",
+      },
+    },
+    "-createdAt -updatedAt",
+    {
+      skip,
+      limit,
+    }
+  );
 
   res.status(200).json(notices);
 };
