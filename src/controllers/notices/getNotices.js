@@ -32,7 +32,10 @@ const getNotices = async (req, res) => {
   const notices = await Notice.find(
     {
       category: `${searchParams.NoticesCategoriesNav}`,
-      comments: { $regex: `${searchParams.NoticesSearch}`, $options: "i" },
+      title: {
+        $regex: `${searchParams.NoticesSearch}`,
+        $options: "i",
+      },
     },
     "-createdAt -updatedAt",
     {
