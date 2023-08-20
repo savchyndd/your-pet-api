@@ -52,7 +52,7 @@ const userSchema = new Schema(
 );
 
 userSchema.post("save", handleMongooseError);
-const User = model("user", userSchema);
+const User = model("users", userSchema);
 
 const registerSchema = Joi.object({
   name: Joi.string().pattern(NAME_REGEX).required().messages({
