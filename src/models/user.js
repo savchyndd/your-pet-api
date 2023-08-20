@@ -28,16 +28,24 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Set password for user"],
     },
-    avatarURL: String,
+    avatarURL: {
+      type: String,
+      default: "",
+    },
     birthday: {
       type: String,
       match: BIRTHDAY_REGEX,
+      default: "",
     },
     phone: {
       type: String,
       match: PHONE_NUMBER_REGEX,
+      default: "",
     },
-    city: String,
+    city: {
+      type: String,
+      default: "",
+    },
     token: String,
   },
   { versionKey: false, timestamps: true }
@@ -72,9 +80,35 @@ const loginSchema = Joi.object({
   }),
 });
 
+const updateUserSchema = Joi.object({
+  name: Joi.string().pattern(NAME_REGEX).messages({
+    "string.pattern.base":
+      "Name may contain any letters, minimum 2 characters, maximum 16. For example Taras, Iryna.",
+  }),
+  email: Joi.string().pattern(EMAIL_REGEX).messages({
+    "string.pattern.base":
+      "Email may contain letters, numbers, an apostrophe, and must be followed by '@' domain name '.' domain suffix. For example Taras@ukr.ua, adrian@gmail.com, JacobM3rcer@hotmail.com",
+  }),
+  birthday: Joi.string()
+    .pattern(BIRTHDAY_REGEX)
+    .messages({
+      "string.pattern.base": "The date must be in the format DD-MM-YYYY.",
+    })
+    .allow(null, ""),
+  phone: Joi.string()
+    .pattern(PHONE_NUMBER_REGEX)
+    .messages({
+      "string.pattern.base":
+        "The number must be a string in the format +380671234567.",
+    })
+    .allow(null, ""),
+  city: Joi.string().allow(null, ""),
+});
+
 const userSchemas = {
   registerSchema,
   loginSchema,
+  updateUserSchema,
 };
 
 module.exports = { User, userSchemas };
