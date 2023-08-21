@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const ctrl = require("../../controllers/notices");
 
-const { validateBody } = require("../../middlewares");
+const { validateBody, authenticate } = require("../../middlewares");
 
 const { noticeSchemas } = require("../../models");
 
@@ -13,6 +13,14 @@ router.get(
   "/",
   validateBody(noticeSchemas.getNoticesSchema),
   asyncHandler(ctrl.getNotices)
+);
+
+router.get("/:noticeId", asyncHandler(ctrl.getNoticeById));
+
+router.patch(
+  "/:noticeId/addFavorite",
+  authenticate,
+  asyncHandler(ctrl.addFavoriteNotice)
 );
 
 module.exports = router;

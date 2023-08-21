@@ -1,8 +1,21 @@
-// const { httpError } = require("../../helpers");
-// const { Notice } = require("../../models");
+const { httpError } = require("../../helpers");
 
-const getNoticeById = async (req, res) => {
-  res.status(201).json({ message: "getNoticeById" });
+const { Notice } = require("../../models");
+
+const addFavoriteNotice = async (req, res) => {
+  const { noticeId } = req.params;
+
+  const updatedNotice = await Notice.findByIdAndUpdate(
+    noticeId,
+    {
+      $addToSet: { idUsersAddedFavorite: req.user._id },
+    },
+    { new: true }
+  );
+
+  if (!updatedNotice) throw httpError(404, "Not found");
+
+  res.status(201).json(updatedNotice);
 };
 
-module.exports = getNoticeById;
+module.exports = addFavoriteNotice;
