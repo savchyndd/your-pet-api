@@ -60,6 +60,10 @@ const noticeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
+  idUsersAddedFavorite: {
+    type: Array,
+    default: [],
+  },
 });
 
 noticeSchema.post("save", handleMongooseError);
