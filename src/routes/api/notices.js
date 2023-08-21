@@ -15,4 +15,6 @@ router.get(
   asyncHandler(ctrl.getNotices)
 );
 
+router.get("/:noticeId", asyncHandler(ctrl.getNoticeById));
+
 module.exports = router;

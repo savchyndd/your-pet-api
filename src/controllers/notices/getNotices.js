@@ -1,6 +1,8 @@
-// const { httpError } = require("../../helpers");
-const { CATEGORY_FOR_PARAMS } = require("../../constants/noticeConstants");
+const { httpError } = require("../../helpers");
+
 const { Notice } = require("../../models");
+
+const { CATEGORY_FOR_PARAMS } = require("../../constants/noticeConstants");
 
 const getNotices = async (req, res) => {
   const searchParams = {};
@@ -28,7 +30,6 @@ const getNotices = async (req, res) => {
         : NoticesCategoriesNav.replaceAll("-", " ");
   }
 
-  console.log(searchParams);
   const notices = await Notice.find(
     {
       category: `${searchParams.NoticesCategoriesNav}`,
@@ -43,6 +44,8 @@ const getNotices = async (req, res) => {
       limit,
     }
   );
+
+  if (!notices) throw httpError(404, "Not Found");
 
   res.status(200).json(notices);
 };
