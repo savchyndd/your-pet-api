@@ -24,5 +24,10 @@ router.patch(
   authenticate,
   asyncHandler(ctrl.addFavoriteNotice)
 );
+router.patch(
+  "/:noticeId/removeFavorite",
+  authenticate,
+  asyncHandler(ctrl.removeFavoriteNotice)
+);
 
 module.exports = router;
