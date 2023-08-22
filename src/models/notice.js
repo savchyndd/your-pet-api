@@ -32,7 +32,9 @@ const noticeSchema = new Schema({
   },
   place: {
     type: String,
+    match: NAME_REGEX,
     default: "",
+    required: isHasRequireCategory(this.category, "place"),
   },
   sex: {
     type: String,
@@ -45,6 +47,7 @@ const noticeSchema = new Schema({
   },
   comments: {
     type: String,
+    max: [120, "Comments shoud be less 120 symbols"],
     default: "",
   },
   category: {
@@ -56,14 +59,21 @@ const noticeSchema = new Schema({
     default: CATEGORY[0],
     required: [true, "category is required"],
   },
+  price: {
+    type: Number,
+    min: [1, "Price must be more than 0"],
+    required: isHasRequireCategory(this.category, "price"),
+  },
   ownerId: {
     type: Schema.Types.ObjectId,
     ref: "users",
   },
-  idUsersAddedFavorite: {
-    type: Array,
-    default: [],
-  },
+  idUsersAddedFavorite: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+    },
+  ],
 });
 
 noticeSchema.post("save", handleMongooseError);
