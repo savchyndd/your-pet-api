@@ -15,6 +15,8 @@ router.get(
   asyncHandler(ctrl.getNotices)
 );
 
+router.get("/favorite", authenticate, asyncHandler(ctrl.getFavoriteNotices));
+
 router.get("/:noticeId", asyncHandler(ctrl.getNoticeById));
 
 router.patch(

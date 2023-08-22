@@ -1,16 +1,16 @@
 const { httpError } = require("../../helpers");
 
 const { Notice } = require("../../models");
-
 const getFavoriteNotices = async (req, res) => {
-  const { noticeId } = req.params;
+  const { _id: userAddedFavorite } = req.user;
 
-  if (!req.body) throw httpError(400, "Missing field favorite");
-
-  const updatedNotice = await Notice.findByIdAndUpdate(noticeId, {
-    $push: { idUsersAddedFavorite: { userId: req.body } },
+  const favoriteNotices = await Notice.find({
+    idUsersAddedFavorite: userAddedFavorite,
   });
-  res.status(200).json(updatedNotice);
+
+  if (!favoriteNotices) throw httpError(404, "Not Found");
+
+  res.status(200).json(favoriteNotices);
 };
 
 module.exports = getFavoriteNotices;
