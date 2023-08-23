@@ -1,12 +1,11 @@
-const { httpError } = require("../../helpers");
-
 const { Notice } = require("../../models");
+
+const { httpError } = require("../../helpers");
 
 const { CATEGORY_FOR_PARAMS } = require("../../constants/noticeConstants");
 
 const getNotices = async (req, res) => {
   const searchParams = {};
-
   const {
     page = 1,
     limit = 20,

@@ -421,6 +421,65 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["Notice"],
+        "summary": "Delete owner notice by id",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "noticeId",
+            "required": true,
+            "description": "Notice's id",
+            "schema": {
+              "type": "string",
+              "example": "64e251e974992f975f71c4ee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveOwnerNoticeResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorUnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorNotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/notices/{:noticeId}/addFavorite": {
@@ -1354,6 +1413,16 @@
           ]
         }
       },
+      "RemoveOwnerNoticeResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Successful operation",
+            "example": "Notice successfully delete"
+          }
+        }
+      },
 
       "ErrorBadRequestResponse": {
         "type": "object",
@@ -1365,6 +1434,7 @@
           }
         }
       },
+
       "ErrorConflictEmailResponse": {
         "type": "object",
         "properties": {
