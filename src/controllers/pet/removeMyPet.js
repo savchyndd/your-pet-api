@@ -1,7 +1,5 @@
 const { MyPet } = require('../../models/myPetModel');
-const { httpError } = require('../../helpers/httpError');
-
-const { tryCatchWrapper } = require('../../utils/index');
+const { httpError, tryCatchWrapper } = require('../../helpers/index');
 
 const removeMyPet = async (req, res) => {
   const { petId } = req.params;

@@ -1,6 +1,5 @@
 const { MyPet } = require('../../models/myPetModel');
-const { HttpError } = require('../../helpers/index');
-const { tryCatchWrapper } = require('../../utils/index');
+const { HttpError, tryCatchWrapper } = require('../../helpers/index');
 
 const addMyPet = async (req, res) => {
   const { name } = req.body;
