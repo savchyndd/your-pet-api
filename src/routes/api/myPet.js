@@ -18,7 +18,7 @@ const {
 router.post(
   '/',
   authenticate,
-  isValidId(joiSchema),
+//   isValidId(joiSchema),
   upload.single('image'),
   addMyPet
 );
