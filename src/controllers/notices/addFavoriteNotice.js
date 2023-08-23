@@ -3,7 +3,7 @@ const { Notice } = require("../../models");
 const { httpError } = require("../../helpers");
 
 const addFavoriteNotice = async (req, res) => {
-  const { noticeId } = req.params;
+  const { id: noticeId } = req.params;
 
   const updatedNotice = await Notice.findByIdAndUpdate(
     noticeId,

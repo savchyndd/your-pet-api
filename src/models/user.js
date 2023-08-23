@@ -42,7 +42,7 @@ const userSchema = new Schema(
       match: PHONE_NUMBER_REGEX,
       default: "",
     },
-    city: {
+    location: {
       type: String,
       default: "",
     },

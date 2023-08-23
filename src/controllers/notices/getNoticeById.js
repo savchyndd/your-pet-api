@@ -3,7 +3,7 @@ const { Notice } = require("../../models");
 const { httpError } = require("../../helpers");
 
 const getNoticeById = async (req, res) => {
-  const { noticeId } = req.params;
+  const { id: noticeId } = req.params;
 
   const notice = await Notice.findById(noticeId);
 

@@ -3,7 +3,7 @@ const { Notice } = require("../../models");
 const { httpError } = require("../../helpers");
 
 const removeOwnerNotice = async (req, res) => {
-  const { noticeId } = req.params;
+  const { id: noticeId } = req.params;
   const { _id: owner } = req.user;
 
   const updatedNotice = await Notice.findByIdAndRemove(noticeId, owner);
