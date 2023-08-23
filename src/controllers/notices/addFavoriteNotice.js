@@ -15,7 +15,7 @@ const addFavoriteNotice = async (req, res) => {
 
   if (!updatedNotice) throw httpError(404, "Not found");
 
-  res.status(201).json(updatedNotice);
+  res.json({ message: "Notice successfully add to favorite" });
 };
 
 module.exports = addFavoriteNotice;

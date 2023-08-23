@@ -3,7 +3,12 @@ const asyncHandler = require("express-async-handler");
 
 const ctrl = require("../../controllers/notices");
 
-const { validateBody, authenticate, isValidId } = require("../../middlewares");
+const {
+  validateBody,
+  authenticate,
+  isValidId,
+  upload,
+} = require("../../middlewares");
 
 const { noticeSchemas } = require("../../models");
 
@@ -39,6 +44,13 @@ router.patch(
   isValidId,
   authenticate,
   asyncHandler(ctrl.removeFavoriteNotice)
+);
+router.post(
+  "/",
+  authenticate,
+  upload.single("petAvatar"),
+  validateBody(noticeSchemas.addNoticeSchema),
+  asyncHandler(ctrl.addNotice)
 );
 
 module.exports = router;

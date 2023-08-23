@@ -14,6 +14,8 @@ const noticeSchema = new Schema(
   {
     title: {
       type: String,
+      min: [2, "Comments shoud be more 2 symbols"],
+      max: [40, "Comments shoud be less 120 symbols"],
       required: [true, "title is required"],
     },
     petAvatarURL: {
@@ -86,12 +88,43 @@ const noticeSchema = new Schema(
 noticeSchema.post("save", handleMongooseError);
 const Notice = model("notices", noticeSchema);
 
-const getNoticesSchema = Joi.object({
-  category: Joi.string(),
+const addNoticeSchema = Joi.object({
+  title: Joi.string().min(2).max(40).required(),
+  category: Joi.string()
+    .valid(...CATEGORY)
+    .required(),
+  name: Joi.string().pattern(NAME_REGEX).required().messages({
+    "string.pattern.base":
+      "name may contain any letters, minimum 2 characters, maximum 16. For example Rex, Shella.",
+  }),
+  birthday: Joi.string()
+    .pattern(BIRTHDAY_REGEX)
+    .messages({
+      "string.pattern.base": "The date must be in the format DD-MM-YYYY.",
+    })
+    .required(),
+  type: Joi.string().min(2).max(16).required(),
+  sex: Joi.string()
+    .valid(...SEX)
+    .when("category", {
+      is: Joi.string().valid(...CATEGORY),
+      then: Joi.required(),
+      otherwise: Joi.optional(),
+    }),
+  location: Joi.string().pattern(LOCATION_REGEX).required().messages({
+    "string.pattern.base":
+      "The location may contain any letters. For example Lviv, Ivano-Frankivsk",
+  }),
+  price: Joi.number().min(1).when("category", {
+    is: "sell",
+    then: Joi.required(),
+    otherwise: Joi.optional(),
+  }),
+  comments: Joi.string().max(120),
 });
 
 const noticeSchemas = {
-  getNoticesSchema,
+  addNoticeSchema,
 };
 
 module.exports = { Notice, noticeSchemas };

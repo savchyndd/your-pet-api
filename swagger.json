@@ -371,6 +371,64 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["Notice"],
+        "summary": "Add notices by chose category",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Notice's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddNoticeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorUnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorNotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/notices/favorite": {
@@ -949,10 +1007,15 @@
         "items": {
           "type": "object",
           "properties": {
-            "_id": {
+            "title": {
               "type": "string",
-              "description": "Notice's id",
-              "example": "64e241fcf0a5815cc09050e5"
+              "description": "Notice's title",
+              "example": "Cute cat looking for a home"
+            },
+            "petAvatarURL": {
+              "type": "string",
+              "description": "Pet's foto link",
+              "example": "https://loremflickr.com/640/480/animals"
             },
             "name": {
               "type": "string",
@@ -969,21 +1032,21 @@
               "description": "Pet's type",
               "example": "Promeranian"
             },
-            "place": {
-              "type": "string",
-              "description": "Pet's city",
-              "example": "Barnstable Town"
-            },
             "sex": {
               "type": "string",
               "description": "Pet's sex",
               "enum": ["male", "female"],
               "example": "male"
             },
-            "ownerId": {
+            "comments": {
               "type": "string",
-              "description": "Owner's id",
-              "example": "534d677fcc8ea74aedaabdc1"
+              "description": "Notice's comments",
+              "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+            },
+            "location": {
+              "type": "string",
+              "description": "Pet's city",
+              "example": "Barnstable Town"
             },
             "category": {
               "type": "string",
@@ -991,125 +1054,15 @@
               "enum": ["sell", "lost/found", "in good hands"],
               "example": "lost/found"
             },
-            "petAvatarURL": {
-              "type": "string",
-              "description": "Pet's foto link",
-              "example": "https://loremflickr.com/640/480/animals"
-            },
-            "title": {
-              "type": "string",
-              "description": "Notice's title",
-              "example": "Cute cat looking for a home"
-            },
-            "comments": {
-              "type": "string",
-              "description": "Notice's comments",
-              "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
-            },
             "price": {
-              "type": "Number",
+              "type": "number",
               "description": "Pet's price",
-              "example": "42"
-            }
-          }
-        },
-        "example": [
-          {
-            "_id": "64e241fcf0a5815cc09050e5",
-            "name": "Melany",
-            "birthday": "21-09-2023",
-            "type": "Promeranian",
-            "place": "Barnstable Town",
-            "sex": "male",
-            "owner": "534d677fcc8ea74aedaabdc1",
-            "category": "lost/found",
-            "petAvatarURL": "https://loremflickr.com/640/480/animals",
-            "title": "Cute cat looking for a home",
-            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-            "price": "40"
-          },
-          {
-            "_id": "64e241fcf0a5815cc09050e6",
-            "name": "Charlie",
-            "birthday": "21-09-2023",
-            "type": "Promeranian",
-            "place": "Little Rock",
-            "sex": "male",
-            "owner": "f24cf26ff2b7a80e999b8abb",
-            "category": "lost/found",
-            "petAvatarURL": "https://loremflickr.com/640/480/animals",
-            "title": "Cute pet looking for a home",
-            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-            "price": "70"
-          }
-        ]
-      },
-      "GetFavoriteNoticesResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string",
-              "description": "Notice's id",
-              "example": "64e241fcf0a5815cc09050e5"
+              "example": "23"
             },
-            "name": {
-              "type": "string",
-              "description": "Pet's name",
-              "example": "Melany"
-            },
-            "birthday": {
-              "type": "string",
-              "description": "Pet's birthday",
-              "example": "21-09-2023"
-            },
-            "type": {
-              "type": "string",
-              "description": "Pet's type",
-              "example": "Promeranian"
-            },
-            "place": {
-              "type": "string",
-              "description": "Pet's city",
-              "example": "Barnstable Town"
-            },
-            "sex": {
-              "type": "string",
-              "description": "Pet's sex",
-              "enum": ["male", "female"],
-              "example": "male"
-            },
-            "ownerId": {
+            "owner": {
               "type": "string",
               "description": "Owner's id",
               "example": "534d677fcc8ea74aedaabdc1"
-            },
-            "category": {
-              "type": "string",
-              "description": "Notice's category",
-              "enum": ["sell", "lost/found", "in good hands"],
-              "example": "lost/found"
-            },
-            "petAvatarURL": {
-              "type": "string",
-              "description": "Pet's foto link",
-              "example": "https://loremflickr.com/640/480/animals"
-            },
-            "title": {
-              "type": "string",
-              "description": "Notice's title",
-              "example": "Cute cat looking for a home"
-            },
-            "comments": {
-              "type": "string",
-              "description": "Notice's comments",
-              "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
-            },
-            "price": {
-              "type": "Number",
-              "description": "Pet's price",
-              "example": "42"
             },
             "idUsersAddedFavorite": {
               "type": "array",
@@ -1124,44 +1077,160 @@
         },
         "example": [
           {
-            "_id": "64e241fcf0a5815cc09050e5",
-            "name": "Melany",
-            "birthday": "21-09-2023",
-            "type": "Promeranian",
-            "place": "Barnstable Town",
-            "sex": "male",
-            "owner": "534d677fcc8ea74aedaabdc1",
-            "category": "lost/found",
+            "title": "Cute pet looking for a home",
             "petAvatarURL": "https://loremflickr.com/640/480/animals",
-            "title": "Cute cat looking for a home",
-            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-            "price": "40",
-            "idUsersAddedFavorite": ["64df88ca1f2426eddf5014d7"]
-          },
-          {
-            "_id": "64e241fcf0a5815cc09050e6",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
-            "place": "Little Rock",
             "sex": "male",
-            "owner": "f24cf26ff2b7a80e999b8abb",
-            "category": "lost/found",
-            "petAvatarURL": "https://loremflickr.com/640/480/animals",
-            "title": "Cute pet looking for a home",
+            "place": "Little Rock",
             "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-            "price": "70",
-            "idUsersAddedFavorite": ["64df88ca1f2426eddf5014d7"]
+            "category": "sell",
+            "price": "40",
+            "owner": "f24cf26ff2b7a80e999b8abb",
+            "idUsersAddedFavorite": [
+              "64df88ca1f2426eddf5014d7",
+              "75df88ca1f6346eddf5014g6"
+            ]
+          },
+          {
+            "title": "Cute pet looking for a home",
+            "petAvatarURL": "https://loremflickr.com/640/480/animals",
+            "name": "Charlie",
+            "birthday": "21-09-2023",
+            "type": "Promeranian",
+            "sex": "male",
+            "place": "Little Rock",
+            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+            "category": "sell",
+            "price": "40",
+            "owner": "f24cf26ff2b7a80e999b8abb",
+            "idUsersAddedFavorite": [
+              "64df88ca1f2426eddf5014d7",
+              "75df88ca1f6346eddf5014g6"
+            ]
+          }
+        ]
+      },
+      "GetFavoriteNoticesResponse": {
+        "type": "array",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Notice's title",
+            "example": "Cute cat looking for a home"
+          },
+          "petAvatarURL": {
+            "type": "string",
+            "description": "Pet's foto link",
+            "example": "https://loremflickr.com/640/480/animals"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Melany"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pet's birthday",
+            "example": "21-09-2023"
+          },
+          "type": {
+            "type": "string",
+            "description": "Pet's type",
+            "example": "Promeranian"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "enum": ["male", "female"],
+            "example": "male"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's city",
+            "example": "Barnstable Town"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "enum": ["sell", "lost/found", "in good hands"],
+            "example": "lost/found"
+          },
+          "price": {
+            "type": "number",
+            "description": "Pet's price",
+            "example": "23"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
+          },
+          "idUsersAddedFavorite": {
+            "type": "array",
+            "description": "User's id who added notice favorite",
+            "item": {
+              "type": "string",
+              "describe": "User's id",
+              "example": "64df88ca1f2426eddf5014d7"
+            }
+          }
+        },
+        "example": [
+          {
+            "title": "Cute pet looking for a home",
+            "petAvatarURL": "https://loremflickr.com/640/480/animals",
+            "name": "Charlie",
+            "birthday": "21-09-2023",
+            "type": "Promeranian",
+            "sex": "male",
+            "place": "Little Rock",
+            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+            "category": "sell",
+            "price": "40",
+            "owner": "f24cf26ff2b7a80e999b8abb",
+            "idUsersAddedFavorite": [
+              "64df88ca1f2426eddf5014d7",
+              "75df88ca1f6346eddf5014g6"
+            ]
+          },
+          {
+            "title": "Cute pet looking for a home",
+            "petAvatarURL": "https://loremflickr.com/640/480/animals",
+            "name": "Charlie",
+            "birthday": "21-09-2023",
+            "type": "Promeranian",
+            "sex": "male",
+            "place": "Little Rock",
+            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+            "category": "sell",
+            "price": "40",
+            "owner": "f24cf26ff2b7a80e999b8abb",
+            "idUsersAddedFavorite": [
+              "64df88ca1f2426eddf5014d7",
+              "75df88ca1f6346eddf5014g6"
+            ]
           }
         ]
       },
       "GetNoticeByIdResponse": {
         "type": "object",
         "properties": {
-          "_id": {
+          "title": {
             "type": "string",
-            "description": "Notice's id",
-            "example": "64e241fcf0a5815cc09050e5"
+            "description": "Notice's title",
+            "example": "Cute cat looking for a home"
+          },
+          "petAvatarURL": {
+            "type": "string",
+            "description": "Pet's foto link",
+            "example": "https://loremflickr.com/640/480/animals"
           },
           "name": {
             "type": "string",
@@ -1178,21 +1247,21 @@
             "description": "Pet's type",
             "example": "Promeranian"
           },
-          "place": {
-            "type": "string",
-            "description": "Pet's city",
-            "example": "Barnstable Town"
-          },
           "sex": {
             "type": "string",
             "description": "Pet's sex",
             "enum": ["male", "female"],
             "example": "male"
           },
-          "owner": {
+          "comments": {
             "type": "string",
-            "description": "Owner's id",
-            "example": "534d677fcc8ea74aedaabdc1"
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's city",
+            "example": "Barnstable Town"
           },
           "category": {
             "type": "string",
@@ -1200,25 +1269,15 @@
             "enum": ["sell", "lost/found", "in good hands"],
             "example": "lost/found"
           },
-          "petAvatarURL": {
-            "type": "string",
-            "description": "Pet's foto link",
-            "example": "https://loremflickr.com/640/480/animals"
-          },
-          "title": {
-            "type": "string",
-            "description": "Notice's title",
-            "example": "Cute cat looking for a home"
-          },
-          "comments": {
-            "type": "string",
-            "description": "Notice's comments",
-            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
-          },
           "price": {
-            "type": "Number",
+            "type": "number",
             "description": "Pet's price",
-            "example": "42"
+            "example": "23"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
           },
           "idUsersAddedFavorite": {
             "type": "array",
@@ -1231,200 +1290,66 @@
           }
         },
         "example": {
-          "_id": "64e241fcf0a5815cc09050e6",
+          "title": "Cute pet looking for a home",
+          "petAvatarURL": "https://loremflickr.com/640/480/animals",
           "name": "Charlie",
           "birthday": "21-09-2023",
           "type": "Promeranian",
-          "place": "Little Rock",
           "sex": "male",
-          "owner": "f24cf26ff2b7a80e999b8abb",
-          "category": "lost/found",
-          "petAvatarURL": "https://loremflickr.com/640/480/animals",
-          "title": "Cute pet looking for a home",
+          "place": "Little Rock",
           "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-          "idUsersAddedFavorite": ["64df88ca1f2426eddf5014d7"]
+          "category": "sell",
+          "price": "40",
+          "owner": "f24cf26ff2b7a80e999b8abb",
+          "idUsersAddedFavorite": [
+            "64df88ca1f2426eddf5014d7",
+            "75df88ca1f6346eddf5014g6"
+          ]
         }
       },
       "AddNoticeToFavoriteResponse": {
         "type": "object",
         "properties": {
-          "_id": {
+          "message": {
             "type": "string",
-            "description": "Notice's id",
-            "example": "64e241fcf0a5815cc09050e5"
-          },
-          "name": {
-            "type": "string",
-            "description": "Pet's name",
-            "example": "Melany"
-          },
-          "birthday": {
-            "type": "string",
-            "description": "Pet's birthday",
-            "example": "21-09-2023"
-          },
-          "type": {
-            "type": "string",
-            "description": "Pet's type",
-            "example": "Promeranian"
-          },
-          "place": {
-            "type": "string",
-            "description": "Pet's city",
-            "example": "Barnstable Town"
-          },
-          "sex": {
-            "type": "string",
-            "description": "Pet's sex",
-            "enum": ["male", "female"],
-            "example": "male"
-          },
-          "owner": {
-            "type": "string",
-            "description": "Owner's id",
-            "example": "534d677fcc8ea74aedaabdc1"
-          },
-          "category": {
-            "type": "string",
-            "description": "Notice's category",
-            "enum": ["sell", "lost/found", "in good hands"],
-            "example": "lost/found"
-          },
-          "petAvatarURL": {
-            "type": "string",
-            "description": "Pet's foto link",
-            "example": "https://loremflickr.com/640/480/animals"
-          },
-          "title": {
-            "type": "string",
-            "description": "Notice's title",
-            "example": "Cute cat looking for a home"
-          },
-          "comments": {
-            "type": "string",
-            "description": "Notice's comments",
-            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
-          },
-          "idUsersAddedFavorite": {
-            "type": "array",
-            "description": "User's id who added notice favorite",
-            "item": {
-              "type": "string",
-              "describe": "User's id",
-              "example": "64df88ca1f2426eddf5014d7"
-            }
+            "description": "Successful operation",
+            "example": "Notice successfully add to favorite"
           }
-        },
-        "example": {
-          "_id": "64e241fcf0a5815cc09050e6",
-          "name": "Charlie",
-          "birthday": "21-09-2023",
-          "type": "Promeranian",
-          "place": "Little Rock",
-          "sex": "male",
-          "owner": "f24cf26ff2b7a80e999b8abb",
-          "category": "lost/found",
-          "petAvatarURL": "https://loremflickr.com/640/480/animals",
-          "title": "Cute pet looking for a home",
-          "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-          "idUsersAddedFavorite": [
-            "64df88ca1f2426eddf5014d7",
-            "75df88ca1f6346eddf5014g6"
-          ]
         }
       },
       "RemoveNoticeFromFavoriteResponse": {
         "type": "object",
         "properties": {
-          "_id": {
+          "message": {
             "type": "string",
-            "description": "Notice's id",
-            "example": "64e241fcf0a5815cc09050e5"
-          },
-          "name": {
-            "type": "string",
-            "description": "Pet's name",
-            "example": "Melany"
-          },
-          "birthday": {
-            "type": "string",
-            "description": "Pet's birthday",
-            "example": "21-09-2023"
-          },
-          "type": {
-            "type": "string",
-            "description": "Pet's type",
-            "example": "Promeranian"
-          },
-          "place": {
-            "type": "string",
-            "description": "Pet's city",
-            "example": "Barnstable Town"
-          },
-          "sex": {
-            "type": "string",
-            "description": "Pet's sex",
-            "enum": ["male", "female"],
-            "example": "male"
-          },
-          "owner": {
-            "type": "string",
-            "description": "Owner's id",
-            "example": "534d677fcc8ea74aedaabdc1"
-          },
-          "category": {
-            "type": "string",
-            "description": "Notice's category",
-            "enum": ["sell", "lost/found", "in good hands"],
-            "example": "lost/found"
-          },
-          "petAvatarURL": {
-            "type": "string",
-            "description": "Pet's foto link",
-            "example": "https://loremflickr.com/640/480/animals"
-          },
-          "title": {
-            "type": "string",
-            "description": "Notice's title",
-            "example": "Cute cat looking for a home"
-          },
-          "comments": {
-            "type": "string",
-            "description": "Notice's comments",
-            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
-          },
-          "idUsersAddedFavorite": {
-            "type": "array",
-            "description": "User's id who added notice favorite",
-            "item": {
-              "type": "string",
-              "describe": "User's id",
-              "example": "64df88ca1f2426eddf5014d7"
-            }
+            "description": "Successful operation",
+            "example": "Notice successfully remove from favorite"
           }
-        },
-        "example": {
-          "_id": "64e241fcf0a5815cc09050e6",
-          "name": "Charlie",
-          "birthday": "21-09-2023",
-          "type": "Promeranian",
-          "place": "Little Rock",
-          "sex": "male",
-          "owner": "f24cf26ff2b7a80e999b8abb",
-          "category": "lost/found",
-          "petAvatarURL": "https://loremflickr.com/640/480/animals",
-          "title": "Cute pet looking for a home",
-          "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
-          "idUsersAddedFavorite": ["75df88ca1f6346eddf5014g6"]
         }
       },
-      "GetUserNoticesResponse": {
+      "AddNoticeRequest": {
         "type": "object",
+        "required": [
+          "title",
+          "petAvatar",
+          "name",
+          "birthday",
+          "location",
+          "type",
+          "sex",
+          "category",
+          "price"
+        ],
         "properties": {
-          "_id": {
+          "title": {
             "type": "string",
-            "description": "Notice's id",
-            "example": "64e241fcf0a5815cc09050e5"
+            "description": "Notice's title",
+            "example": "Cute cat looking for a home"
+          },
+          "petAvatar": {
+            "type": "string",
+            "description": "Pet's foto link",
+            "example": "https://loremflickr.com/640/480/animals"
           },
           "name": {
             "type": "string",
@@ -1441,21 +1366,21 @@
             "description": "Pet's type",
             "example": "Promeranian"
           },
-          "place": {
-            "type": "string",
-            "description": "Pet's city",
-            "example": "Barnstable Town"
-          },
           "sex": {
             "type": "string",
             "description": "Pet's sex",
             "enum": ["male", "female"],
             "example": "male"
           },
-          "owner": {
+          "comments": {
             "type": "string",
-            "description": "Owner's id",
-            "example": "534d677fcc8ea74aedaabdc1"
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's city",
+            "example": "Barnstable Town"
           },
           "category": {
             "type": "string",
@@ -1463,20 +1388,72 @@
             "enum": ["sell", "lost/found", "in good hands"],
             "example": "lost/found"
           },
-          "petAvatarURL": {
-            "type": "string",
-            "description": "Pet's foto link",
-            "example": "https://loremflickr.com/640/480/animals"
-          },
+          "price": {
+            "type": "number",
+            "description": "Pet's price",
+            "example": "23"
+          }
+        }
+      },
+      "AddNoticeResponse": {
+        "type": "object",
+        "properties": {
           "title": {
             "type": "string",
             "description": "Notice's title",
             "example": "Cute cat looking for a home"
           },
+          "petAvatarURL": {
+            "type": "string",
+            "description": "Pet's foto link",
+            "example": "https://loremflickr.com/640/480/animals"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Melany"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pet's birthday",
+            "example": "21-09-2023"
+          },
+          "type": {
+            "type": "string",
+            "description": "Pet's type",
+            "example": "Promeranian"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "enum": ["male", "female"],
+            "example": "male"
+          },
           "comments": {
             "type": "string",
             "description": "Notice's comments",
             "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's city",
+            "example": "Barnstable Town"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "enum": ["sell", "lost/found", "in good hands"],
+            "example": "lost/found"
+          },
+          "price": {
+            "type": "number",
+            "description": "Pet's price",
+            "example": "23"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
           },
           "idUsersAddedFavorite": {
             "type": "array",
@@ -1489,22 +1466,129 @@
           }
         },
         "example": {
-          "_id": "64e241fcf0a5815cc09050e6",
+          "title": "Cute pet looking for a home",
+          "petAvatarURL": "https://loremflickr.com/640/480/animals",
           "name": "Charlie",
           "birthday": "21-09-2023",
           "type": "Promeranian",
-          "place": "Little Rock",
           "sex": "male",
-          "owner": "f24cf26ff2b7a80e999b8abb",
-          "category": "lost/found",
-          "petAvatarURL": "https://loremflickr.com/640/480/animals",
-          "title": "Cute pet looking for a home",
+          "place": "Little Rock",
           "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+          "category": "sell",
+          "price": "40",
+          "owner": "f24cf26ff2b7a80e999b8abb",
           "idUsersAddedFavorite": [
             "64df88ca1f2426eddf5014d7",
             "75df88ca1f6346eddf5014g6"
           ]
         }
+      },
+      "GetUserNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Notice's title",
+            "example": "Cute cat looking for a home"
+          },
+          "petAvatarURL": {
+            "type": "string",
+            "description": "Pet's foto link",
+            "example": "https://loremflickr.com/640/480/animals"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Melany"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pet's birthday",
+            "example": "21-09-2023"
+          },
+          "type": {
+            "type": "string",
+            "description": "Pet's type",
+            "example": "Promeranian"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "enum": ["male", "female"],
+            "example": "male"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's city",
+            "example": "Barnstable Town"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "enum": ["sell", "lost/found", "in good hands"],
+            "example": "lost/found"
+          },
+          "price": {
+            "type": "number",
+            "description": "Pet's price",
+            "example": "23"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
+          },
+          "idUsersAddedFavorite": {
+            "type": "array",
+            "description": "User's id who added notice favorite",
+            "item": {
+              "type": "string",
+              "describe": "User's id",
+              "example": "64df88ca1f2426eddf5014d7"
+            }
+          }
+        },
+        "example": [
+          {
+            "title": "Cute pet looking for a home",
+            "petAvatarURL": "https://loremflickr.com/640/480/animals",
+            "name": "Charlie",
+            "birthday": "21-09-2023",
+            "type": "Promeranian",
+            "sex": "male",
+            "place": "Little Rock",
+            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+            "category": "sell",
+            "price": "40",
+            "owner": "f24cf26ff2b7a80e999b8abb",
+            "idUsersAddedFavorite": [
+              "64df88ca1f2426eddf5014d7",
+              "75df88ca1f6346eddf5014g6"
+            ]
+          },
+          {
+            "title": "Cute pet looking for a home",
+            "petAvatarURL": "https://loremflickr.com/640/480/animals",
+            "name": "Charlie",
+            "birthday": "21-09-2023",
+            "type": "Promeranian",
+            "sex": "male",
+            "place": "Little Rock",
+            "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+            "category": "sell",
+            "price": "40",
+            "owner": "f24cf26ff2b7a80e999b8abb",
+            "idUsersAddedFavorite": [
+              "64df88ca1f2426eddf5014d7",
+              "75df88ca1f6346eddf5014g6"
+            ]
+          }
+        ]
       },
       "RemoveOwnerNoticeResponse": {
         "type": "object",
