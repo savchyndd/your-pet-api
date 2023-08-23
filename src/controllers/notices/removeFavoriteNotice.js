@@ -1,6 +1,6 @@
-const { httpError } = require("../../helpers");
-
 const { Notice } = require("../../models");
+
+const { httpError } = require("../../helpers");
 
 const removeFavoriteNotice = async (req, res) => {
   const { noticeId } = req.params;
