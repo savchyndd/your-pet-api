@@ -21,6 +21,8 @@ router.post(
   asyncHandler(ctrl.login)
 );
 
+router.get("/current", authenticate, asyncHandler(ctrl.getCurrentUser));
+
 router.post("/logout", authenticate, asyncHandler(ctrl.logout));
 
 router.patch(

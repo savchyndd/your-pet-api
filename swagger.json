@@ -220,6 +220,55 @@
         }
       }
     },
+    "/users/current": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Get current user",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCurrentUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorUnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorNotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/logout": {
       "post": {
         "tags": ["Auth"],
@@ -769,6 +818,50 @@
             "avatarURL": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
           },
           "token": "32143232436545474"
+        }
+      },
+      "GetCurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Taras"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email",
+            "example": "Taras@gmail.com"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar link",
+            "example": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User's birthday",
+            "example": "23-11-2023"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone",
+            "example": "+38099943"
+          },
+          "location": {
+            "type": "string",
+            "description": "User's location",
+            "example": "Lviv"
+          }
+        },
+        "example": {
+          "name": "Taras",
+          "email": "Taras@gmail.com",
+          "avatarURL": "//www.gravatar.com/avatar/1aeb8d9dc4751e229a335e371db8058",
+          "birthday": "23-11-2023",
+          "phone": "+38099943",
+          "location": "Lviv"
         }
       },
       "UserUpdateRequest": {
