@@ -620,27 +620,42 @@
       },
       "RegistrationResponse": {
         "type": "object",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "Name"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "token": {
-              "type": "string",
-              "description": "User's token",
-              "example": "32143232436545474"
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Taras"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email",
+                "example": "Taras@gmail.com"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar link",
+                "example": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058"
+              }
             }
+          },
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "32143232436545474"
           }
         },
-        "example": { "name": "Taras", "email": "Taras@gmail.com" }
+        "example": {
+          "user": {
+            "name": "Taras",
+            "email": "Taras@gmail.com",
+            "avatarURL": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
+          },
+          "token": "32143232436545474"
+        }
       },
       "LoginRequest": {
         "type": "object",
