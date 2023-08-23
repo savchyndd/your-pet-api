@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 const ctrl = require("../../controllers/notices");
 
-const { validateBody, authenticate } = require("../../middlewares");
+const { validateBody, authenticate, isValidId } = require("../../middlewares");
 
 const { noticeSchemas } = require("../../models");
 
@@ -19,17 +19,24 @@ router.get("/favorite", authenticate, asyncHandler(ctrl.getFavoriteNotices));
 
 router.get("/userNotices", authenticate, asyncHandler(ctrl.getOwnerNotices));
 
-router.get("/:noticeId", asyncHandler(ctrl.getNoticeById));
+router.get("/:id", isValidId, asyncHandler(ctrl.getNoticeById));
 
-router.delete("/:noticeId", authenticate, asyncHandler(ctrl.removeOwnerNotice));
+router.delete(
+  "/:id",
+  isValidId,
+  authenticate,
+  asyncHandler(ctrl.removeOwnerNotice)
+);
 
 router.patch(
-  "/:noticeId/addFavorite",
+  "/:id/addFavorite",
+  isValidId,
   authenticate,
   asyncHandler(ctrl.addFavoriteNotice)
 );
 router.patch(
-  "/:noticeId/removeFavorite",
+  "/:id/removeFavorite",
+  isValidId,
   authenticate,
   asyncHandler(ctrl.removeFavoriteNotice)
 );
