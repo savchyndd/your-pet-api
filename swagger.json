@@ -427,6 +427,7 @@
       "patch": {
         "tags": ["Notice"],
         "summary": "Add notice to favorite by id",
+        "security": [{ "Bearer": [] }],
         "parameters": [
           {
             "in": "path",
@@ -487,6 +488,7 @@
       "patch": {
         "tags": ["Notice"],
         "summary": "Remove notice from favorite by id",
+        "security": [{ "Bearer": [] }],
         "parameters": [
           {
             "in": "path",
@@ -506,6 +508,55 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RemoveNoticeFromFavoriteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorUnauthorizedResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorNotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notices/userNotices": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "Get owner user's notices",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserNoticesResponse"
                 }
               }
             }
@@ -1198,6 +1249,94 @@
           "title": "Cute pet looking for a home",
           "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
           "idUsersAddedFavorite": ["75df88ca1f6346eddf5014g6"]
+        }
+      },
+      "GetUserNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Notice's id",
+            "example": "64e241fcf0a5815cc09050e5"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Melany"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pet's birthday",
+            "example": "21-09-2023"
+          },
+          "type": {
+            "type": "string",
+            "description": "Pet's type",
+            "example": "Promeranian"
+          },
+          "place": {
+            "type": "string",
+            "description": "Pet's city",
+            "example": "Barnstable Town"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "enum": ["male", "female"],
+            "example": "male"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "enum": ["sell", "lost/found", "in good hands"],
+            "example": "lost/found"
+          },
+          "petAvatarURL": {
+            "type": "string",
+            "description": "Pet's foto link",
+            "example": "https://loremflickr.com/640/480/animals"
+          },
+          "title": {
+            "type": "string",
+            "description": "Notice's title",
+            "example": "Cute cat looking for a home"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!"
+          },
+          "idUsersAddedFavorite": {
+            "type": "array",
+            "description": "User's id who added notice favorite",
+            "item": {
+              "type": "string",
+              "describe": "User's id",
+              "example": "64df88ca1f2426eddf5014d7"
+            }
+          }
+        },
+        "example": {
+          "_id": "64e241fcf0a5815cc09050e6",
+          "name": "Charlie",
+          "birthday": "21-09-2023",
+          "type": "Promeranian",
+          "place": "Little Rock",
+          "sex": "male",
+          "owner": "f24cf26ff2b7a80e999b8abb",
+          "category": "lost/found",
+          "petAvatarURL": "https://loremflickr.com/640/480/animals",
+          "title": "Cute pet looking for a home",
+          "comments": "Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!",
+          "idUsersAddedFavorite": [
+            "64df88ca1f2426eddf5014d7",
+            "75df88ca1f6346eddf5014g6"
+          ]
         }
       },
 

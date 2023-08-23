@@ -64,7 +64,7 @@ const noticeSchema = new Schema({
     min: [1, "Price must be more than 0"],
     required: isHasRequireCategory(this.category, "price"),
   },
-  ownerId: {
+  owner: {
     type: Schema.Types.ObjectId,
     ref: "users",
   },
