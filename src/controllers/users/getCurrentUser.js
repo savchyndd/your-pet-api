@@ -1,7 +1,7 @@
 const getCurrentUser = async (req, res) => {
-  const { name, email, avatarURL, birthday, phone, location } = req.user;
+  const { _id, name, email, avatarURL, birthday, phone, location } = req.user;
 
-  res.json({ name, email, avatarURL, birthday, phone, location });
+  res.json({ _id, name, email, avatarURL, birthday, phone, location });
 };
 
 module.exports = getCurrentUser;

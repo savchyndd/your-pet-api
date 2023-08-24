@@ -839,6 +839,11 @@
           "user": {
             "type": "object",
             "properties": {
+              "_id": {
+                "type": "string",
+                "describing": "User's id",
+                "example": "534d677fcc8ea7aedaabc1"
+              },
               "name": {
                 "type": "string",
                 "description": "User's name",
@@ -865,6 +870,7 @@
         },
         "example": {
           "user": {
+            "_id": "3444542njnj54khbhb45bhk",
             "name": "Taras",
             "email": "Taras@gmail.com",
             "avatarURL": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
@@ -894,6 +900,11 @@
           "user": {
             "type": "object",
             "properties": {
+              "_id": {
+                "type": "string",
+                "describing": "User's id",
+                "example": "534d677fcc8ea7aedaabc1"
+              },
               "name": {
                 "type": "string",
                 "description": "User's name",
@@ -920,6 +931,7 @@
         },
         "example": {
           "user": {
+            "_id": "3444542njnj54khbhb45bhk",
             "name": "Taras",
             "email": "Taras@gmail.com",
             "avatarURL": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
@@ -930,6 +942,11 @@
       "GetCurrentUserResponse": {
         "type": "object",
         "properties": {
+          "_id": {
+            "type": "string",
+            "describing": "User's id",
+            "example": "534d677fcc8ea7aedaabc1"
+          },
           "name": {
             "type": "string",
             "description": "User's name",
@@ -963,6 +980,7 @@
           }
         },
         "example": {
+          "_id": "3444542njnj54khbhb45bhk",
           "name": "Taras",
           "email": "Taras@gmail.com",
           "avatarURL": "//www.gravatar.com/avatar/1aeb8d9dc4751e229a335e371db8058",
@@ -1010,6 +1028,11 @@
       "UserUpdateResponse": {
         "type": "object",
         "properties": {
+          "_id": {
+            "type": "string",
+            "describing": "User's id",
+            "example": "534d677fcc8ea7aedaabc1"
+          },
           "name": {
             "type": "string",
             "description": "User's name",
@@ -1042,6 +1065,7 @@
           }
         },
         "example": {
+          "_id": "3444542njnj54khbhb45bhk",
           "name": "Taras",
           "email": "user@example.com",
           "avatarURL": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058",

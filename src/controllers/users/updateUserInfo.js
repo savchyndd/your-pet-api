@@ -19,7 +19,7 @@ const updateUserInfo = async (req, res) => {
 
   if (!name || !email) throw httpError(404, "Not found");
 
-  res.status(201).json({ name, email, avatarURL, birthday, phone, city });
+  res.status(201).json({ _id, name, email, avatarURL, birthday, phone, city });
 };
 
 module.exports = updateUserInfo;
