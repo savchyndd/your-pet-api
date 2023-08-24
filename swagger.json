@@ -484,7 +484,7 @@
         }
       }
     },
-    "/notices/{:noticeId}": {
+    "/notices/{noticeId}": {
       "get": {
         "tags": ["Notice"],
         "summary": "Get notice by id",
@@ -593,7 +593,7 @@
         }
       }
     },
-    "/notices/{:noticeId}/addFavorite": {
+    "/notices/{noticeId}/addFavorite": {
       "patch": {
         "tags": ["Notice"],
         "summary": "Add notice to favorite by id",
@@ -654,7 +654,7 @@
         }
       }
     },
-    "/notices/{:noticeId}/removeFavorite": {
+    "/notices/{noticeId}/removeFavorite": {
       "patch": {
         "tags": ["Notice"],
         "summary": "Remove notice from favorite by id",
