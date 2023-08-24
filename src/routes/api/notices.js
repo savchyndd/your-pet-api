@@ -14,11 +14,7 @@ const { noticeSchemas } = require("../../models");
 
 const router = express.Router();
 
-router.get(
-  "/",
-  validateBody(noticeSchemas.getNoticesSchema),
-  asyncHandler(ctrl.getNotices)
-);
+router.get("/", asyncHandler(ctrl.getNotices));
 
 router.get("/favorite", authenticate, asyncHandler(ctrl.getFavoriteNotices));
 
