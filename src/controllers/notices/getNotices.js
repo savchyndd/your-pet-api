@@ -25,8 +25,8 @@ const getNotices = async (req, res) => {
   } else {
     searchParams.NoticesCategoriesNav =
       NoticesCategoriesNav === "lost-found"
-        ? NoticesCategoriesNav.replaceAll("-", "/")
-        : NoticesCategoriesNav.replaceAll("-", " ");
+        ? NoticesCategoriesNav.split("-").join("/")
+        : NoticesCategoriesNav.split("-").join(" ");
   }
 
   const notices = await Notice.find(
