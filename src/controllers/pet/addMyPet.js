@@ -1,12 +1,12 @@
 const { MyPet } = require('../../models/pet');
-const { HttpError, tryCatchWrapper } = require('../../helpers/index');
+const { httpError, tryCatchWrapper } = require('../../helpers/index');
 
 const addMyPet = async (req, res) => {
   const { name } = req.body;
 
   const pet = await MyPet.findOne({ name });
   if (pet) {
-    throw HttpError(409, `Pet ${name} already in use`);
+    throw httpError(409, `Pet ${name} already in use`);
   }
 
   const { _id: owner } = req.user;

@@ -11,14 +11,14 @@ const {
 const { joiSchema } = require('../../models/pet');
 const {
   upload,
-  isValidId,
+  validation,
   authenticate,
 } = require('../../middlewares/index');
 
 router.post(
   '/',
   authenticate,
-//   isValidId(joiSchema),
+  validation(joiSchema),
   upload.single('image'),
   addMyPet
 );
