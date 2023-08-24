@@ -20,6 +20,10 @@
     {
       "name": "Notice",
       "description": "Notice's endpoints"
+    },
+    {
+      "name": "Pets",
+      "description": "Pet endpoints"
     }
   ],
   "paths": {
@@ -756,6 +760,51 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/pet": {
+      "post": {
+        "tags": ["Pets"],
+        "summary": "Add animal card",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/pet/{petId}": {
+      "delete": {
+        "tags": ["Pets"],
+        "summary": "Removing the animal card",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Pet with id not found"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
