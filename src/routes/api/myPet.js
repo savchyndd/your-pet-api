@@ -6,6 +6,7 @@ const {
   removeMyPet,
   addMyPet,
   getMyPet,
+  addAvatar,
 } = require('../../controllers/pet/index');
 
 const { joiSchema } = require('../../models/pet');
@@ -25,5 +26,7 @@ router.post(
 router.get('/', authenticate, getMyPet);
 
 router.delete('/:petId', authenticate, removeMyPet);
+
+router.patch("/avatars", authenticate, upload.single("avatar"), addAvatar);
 
 module.exports = router;
