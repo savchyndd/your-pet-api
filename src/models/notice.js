@@ -16,7 +16,6 @@ const noticeSchema = new Schema(
       type: String,
       min: [2, "Comments shoud be more 2 symbols"],
       max: [40, "Comments shoud be less 120 symbols"],
-      required: [true, "title is required"],
     },
     petAvatarURL: {
       type: String,
@@ -89,7 +88,7 @@ noticeSchema.post("save", handleMongooseError);
 const Notice = model("notices", noticeSchema);
 
 const addNoticeSchema = Joi.object({
-  title: Joi.string().min(2).max(40).required(),
+  title: Joi.string().min(2).max(40),
   category: Joi.string()
     .valid(...CATEGORY)
     .required(),
