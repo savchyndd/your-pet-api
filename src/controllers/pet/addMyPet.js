@@ -21,7 +21,7 @@ const addMyPet = async (req, res) => {
   
   const result = await MyPet.create({
     ...newPet,
-    avatarURL
+    avatarURL,
   });
 
   res.status(201).json({

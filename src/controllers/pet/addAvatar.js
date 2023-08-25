@@ -4,7 +4,7 @@ const { tryCatchWrapper } = require('../../helpers/index');
 const { MyPet } = require('../../models/pet');
 const Jimp = require("jimp");
 
-const avatarsDir = path.join(__dirname, "../", "public", "pets");
+const avatarsDir = path.join(__dirname, "../", "../", "public", "pets");
 
 const addAvatar = async (req, res) => {
   const { _id } = req.params;
