@@ -12,6 +12,7 @@ const petSchema = new Schema({
     type: String,
     require: true,
   },
+  birthday: {type: String},
   breed: { type: String },
   sex: { type: String },
   comments: { type: String },
@@ -30,11 +31,13 @@ petSchema.post('save', handleMongooseError);
 const joiSchema = Joi.object({
   name: Joi.string().alphanum().required(),
   date: Joi.string().required(),
+  birthday: Joi.string(),
   breed: Joi.string(),
   sex: Joi.string(),
   location: Joi.string(),
   price: Joi.string(),
   title: Joi.string(),
+  category: Joi.string(),
   comments: Joi.string(),
   avatarURL: Joi.string(),
 });

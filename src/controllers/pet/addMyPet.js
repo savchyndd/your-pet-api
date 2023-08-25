@@ -1,6 +1,8 @@
 const { MyPet } = require('../../models/pet');
 const { httpError, tryCatchWrapper } = require('../../helpers/index');
 
+const gravatar = require("gravatar");
+
 const addMyPet = async (req, res) => {
   const { name } = req.body;
 
@@ -15,8 +17,11 @@ const addMyPet = async (req, res) => {
     ? { avatarURL: req.file.path, owner, ...req.body }
     : { owner, ...req.body };
 
+  const avatarURL = gravatar.url(name);
+  
   const result = await MyPet.create({
     ...newPet,
+    avatarURL,
   });
 
   res.status(201).json({
