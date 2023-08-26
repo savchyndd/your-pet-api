@@ -1,3 +1,5 @@
+const asyncHandler = require("express-async-handler");
+
 const getNotices = require("./getNotices");
 const getNoticeById = require("./getNoticeById");
 const addFavoriteNotice = require("./addFavoriteNotice");
@@ -8,12 +10,12 @@ const getOwnerNotices = require("./getOwnerNotices");
 const removeOwnerNotice = require("./removeOwnerNotice");
 
 module.exports = {
-  getNotices: getNotices,
-  getNoticeById: getNoticeById,
-  addFavoriteNotice: addFavoriteNotice,
-  getFavoriteNotices: getFavoriteNotices,
-  removeFavoriteNotice: removeFavoriteNotice,
-  addNotice: addNotice,
-  getOwnerNotices: getOwnerNotices,
-  removeOwnerNotice: removeOwnerNotice,
+  getNotices: asyncHandler(getNotices),
+  getNoticeById: asyncHandler(getNoticeById),
+  addFavoriteNotice: asyncHandler(addFavoriteNotice),
+  getFavoriteNotices: asyncHandler(getFavoriteNotices),
+  removeFavoriteNotice: asyncHandler(removeFavoriteNotice),
+  addNotice: asyncHandler(addNotice),
+  getOwnerNotices: asyncHandler(getOwnerNotices),
+  removeOwnerNotice: asyncHandler(removeOwnerNotice),
 };

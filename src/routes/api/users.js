@@ -1,5 +1,4 @@
 const express = require("express");
-const asyncHandler = require("express-async-handler");
 
 const ctrl = require("../../controllers/users");
 
@@ -12,25 +11,21 @@ const router = express.Router();
 router.post(
   "/auth/register",
   validateBody(userSchemas.registerSchema),
-  asyncHandler(ctrl.register)
+  ctrl.register
 );
 
-router.post(
-  "/auth/login",
-  validateBody(userSchemas.loginSchema),
-  asyncHandler(ctrl.login)
-);
+router.post("/auth/login", validateBody(userSchemas.loginSchema), ctrl.login);
 
-router.get("/current", authenticate, asyncHandler(ctrl.getCurrentUser));
+router.get("/current", authenticate, ctrl.getCurrentUser);
 
-router.post("/logout", authenticate, asyncHandler(ctrl.logout));
+router.post("/logout", authenticate, ctrl.logout);
 
 router.patch(
   "/update",
   authenticate,
   upload.single("avatar"),
   validateBody(userSchemas.updateUserSchema),
-  asyncHandler(ctrl.updateUserInfo)
+  ctrl.updateUserInfo
 );
 
 module.exports = router;
