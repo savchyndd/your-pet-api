@@ -926,7 +926,7 @@
               "avatarURL": {
                 "type": "string",
                 "description": "User's avatar link",
-                "example": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058"
+                "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
               }
             }
           },
@@ -941,7 +941,7 @@
             "_id": "3444542njnj54khbhb45bhk",
             "name": "Taras",
             "email": "Taras@gmail.com",
-            "avatarURL": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
+            "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
           },
           "token": "32143232436545474"
         }
@@ -987,7 +987,7 @@
               "avatarURL": {
                 "type": "string",
                 "description": "User's avatar link",
-                "example": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058"
+                "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
               }
             }
           },
@@ -1002,7 +1002,7 @@
             "_id": "3444542njnj54khbhb45bhk",
             "name": "Taras",
             "email": "Taras@gmail.com",
-            "avatarURL": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
+            "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
           },
           "token": "32143232436545474"
         }
@@ -1029,7 +1029,7 @@
           "avatarURL": {
             "type": "string",
             "description": "User's avatar link",
-            "example": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058"
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
           },
           "birthday": {
             "type": "string",
@@ -1051,7 +1051,7 @@
           "_id": "3444542njnj54khbhb45bhk",
           "name": "Taras",
           "email": "Taras@gmail.com",
-          "avatarURL": "//www.gravatar.com/avatar/1aeb8d9dc4751e229a335e371db8058",
+          "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png",
           "birthday": "23-11-2023",
           "phone": "+38099943",
           "location": "Lviv"
@@ -1114,7 +1114,7 @@
           "avatarURL": {
             "type": "string",
             "description": "User's avatar link",
-            "example": "//www.gravatar.com/avatar/1aedb8ddc4751e229a335e371db805"
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
           },
           "birthday": {
             "type": "string",
@@ -1136,7 +1136,7 @@
           "_id": "3444542njnj54khbhb45bhk",
           "name": "Taras",
           "email": "user@example.com",
-          "avatarURL": "//www.gravatar.com/avatar/1aedb8d9dc4751e229a335e371db8058",
+          "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png",
           "birthday": "23-12-2023",
           "phone": "+38097485495",
           "city": "Lviv"
@@ -1156,7 +1156,7 @@
             "petAvatarURL": {
               "type": "string",
               "description": "Pet's foto link",
-              "example": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg"
+              "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
             },
             "name": {
               "type": "string",
@@ -1219,7 +1219,7 @@
         "example": [
           {
             "title": "Cute pet looking for a home",
-            "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+            "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
@@ -1236,7 +1236,7 @@
           },
           {
             "title": "Cute pet looking for a home",
-            "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+            "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
@@ -1264,7 +1264,7 @@
           "petAvatarURL": {
             "type": "string",
             "description": "Pet's foto link",
-            "example": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg"
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
           },
           "name": {
             "type": "string",
@@ -1326,7 +1326,7 @@
         "example": [
           {
             "title": "Cute pet looking for a home",
-            "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+            "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
@@ -1343,7 +1343,7 @@
           },
           {
             "title": "Cute pet looking for a home",
-            "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+            "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
@@ -1371,7 +1371,7 @@
           "petAvatarURL": {
             "type": "string",
             "description": "Pet's foto link",
-            "example": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg"
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
           },
           "name": {
             "type": "string",
@@ -1432,7 +1432,7 @@
         },
         "example": {
           "title": "Cute pet looking for a home",
-          "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+          "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
           "name": "Charlie",
           "birthday": "21-09-2023",
           "type": "Promeranian",
@@ -1548,7 +1548,7 @@
           "petAvatarURL": {
             "type": "string",
             "description": "Pet's foto link",
-            "example": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg"
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
           },
           "name": {
             "type": "string",
@@ -1609,7 +1609,7 @@
         },
         "example": {
           "title": "Cute pet looking for a home",
-          "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+          "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
           "name": "Charlie",
           "birthday": "21-09-2023",
           "type": "Promeranian",
@@ -1636,7 +1636,7 @@
           "petAvatarURL": {
             "type": "string",
             "description": "Pet's foto link",
-            "example": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg"
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
           },
           "name": {
             "type": "string",
@@ -1698,7 +1698,7 @@
         "example": [
           {
             "title": "Cute pet looking for a home",
-            "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+            "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
@@ -1715,7 +1715,7 @@
           },
           {
             "title": "Cute pet looking for a home",
-            "petAvatarURL": "pets/64df88ca1f2426eddf5014d7_Shella_cat.jpg",
+            "petAvatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
             "name": "Charlie",
             "birthday": "21-09-2023",
             "type": "Promeranian",
