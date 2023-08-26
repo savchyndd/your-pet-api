@@ -1086,9 +1086,9 @@
             "description": "User's phone number",
             "example": "+38097485495"
           },
-          "city": {
+          "location": {
             "type": "string",
-            "description": "User's city",
+            "description": "User's location",
             "example": "Lviv"
           }
         }
@@ -1126,9 +1126,9 @@
             "description": "User's phone number",
             "example": "+38097485495"
           },
-          "city": {
+          "location": {
             "type": "string",
-            "description": "User's city",
+            "description": "User's location",
             "example": "Lviv"
           }
         },
@@ -1139,7 +1139,7 @@
           "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png",
           "birthday": "23-12-2023",
           "phone": "+38097485495",
-          "city": "Lviv"
+          "location": "Lviv"
         }
       },
 
@@ -1186,7 +1186,7 @@
             },
             "location": {
               "type": "string",
-              "description": "Pet's city",
+              "description": "Pet's location",
               "example": "Barnstable Town"
             },
             "category": {
@@ -1294,7 +1294,7 @@
           },
           "location": {
             "type": "string",
-            "description": "Pet's city",
+            "description": "Pet's location",
             "example": "Barnstable Town"
           },
           "category": {
@@ -1401,7 +1401,7 @@
           },
           "location": {
             "type": "string",
-            "description": "Pet's city",
+            "description": "Pet's location",
             "example": "Barnstable Town"
           },
           "category": {
@@ -1521,7 +1521,7 @@
           },
           "location": {
             "type": "string",
-            "description": "Pet's city",
+            "description": "Pet's location",
             "example": "Barnstable Town"
           },
           "category": {
@@ -1578,7 +1578,7 @@
           },
           "location": {
             "type": "string",
-            "description": "Pet's city",
+            "description": "Pet's location",
             "example": "Barnstable Town"
           },
           "category": {
@@ -1666,7 +1666,7 @@
           },
           "location": {
             "type": "string",
-            "description": "Pet's city",
+            "description": "Pet's location",
             "example": "Barnstable Town"
           },
           "category": {
