@@ -1,6 +1,6 @@
 const { httpError } = require("../../helpers");
 const { User } = require("../../models");
-const uploadAvatar = require("../../utils/uploadAvatar");
+// const uploadAvatar = require("../../utils/uploadAvatar");
 
 const updateUserInfo = async (req, res) => {
   const { _id } = req.user;
@@ -8,11 +8,12 @@ const updateUserInfo = async (req, res) => {
 
   if (!req.body || !req.file) throw httpError(400, "Missing any field");
 
-  if (req.file) updatedUser.avatarURL = await uploadAvatar(req);
   if (req.body) updatedUser = { ...req.body };
+  if (req.file) updatedUser.avatarURL = req.file.path;
 
+  console.log(updatedUser);
   const { name, email, avatarURL, birthday, phone, city } =
-    await User.findByIdAndUpdate(_id, req.body, {
+    await User.findByIdAndUpdate(_id, updatedUser, {
       new: true,
       runValidators: true,
     });

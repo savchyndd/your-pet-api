@@ -8,7 +8,7 @@ const getNotices = async (req, res) => {
   const searchParams = {};
   const {
     page = 1,
-    limit = 20,
+    limit = 12,
     NoticesCategoriesNav = "sell",
     NoticesSearch,
   } = req.query;

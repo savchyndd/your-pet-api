@@ -2,7 +2,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const gravatar = require("gravatar");
+// const gravatar = require("gravatar");
 
 const { httpError } = require("../../helpers");
 
@@ -17,7 +17,8 @@ const register = async (req, res) => {
   if (user) throw httpError(409, "Email in use");
 
   const hashPass = await bcrypt.hash(password, 10);
-  const avatarURL = gravatar.url(email);
+  const avatarURL =
+    "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png";
 
   const newUser = await User.create({
     ...req.body,

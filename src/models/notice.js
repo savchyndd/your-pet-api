@@ -16,6 +16,7 @@ const noticeSchema = new Schema(
       type: String,
       min: [2, "Comments shoud be more 2 symbols"],
       max: [40, "Comments shoud be less 120 symbols"],
+      required: isHasRequireCategory(this.category, "title"),
     },
     petAvatarURL: {
       type: String,
@@ -88,14 +89,24 @@ noticeSchema.post("save", handleMongooseError);
 const Notice = model("notices", noticeSchema);
 
 const addNoticeSchema = Joi.object({
-  title: Joi.string().min(2).max(40),
+  title: Joi.string()
+    .min(2)
+    .max(40)
+    .when("category", {
+      is: Joi.string().valid(...CATEGORY),
+      then: Joi.required(),
+      otherwise: Joi.optional(),
+    }),
   category: Joi.string()
     .valid(...CATEGORY)
     .required(),
-  name: Joi.string().pattern(NAME_REGEX).required().messages({
-    "string.pattern.base":
-      "name may contain any letters, minimum 2 characters, maximum 16. For example Rex, Shella.",
-  }),
+  name: Joi.string()
+    .pattern(NAME_REGEX)
+    .messages({
+      "string.pattern.base":
+        "name may contain any letters, minimum 2 characters, maximum 16. For example Rex, Shella.",
+    })
+    .required(),
   birthday: Joi.string()
     .pattern(BIRTHDAY_REGEX)
     .messages({
