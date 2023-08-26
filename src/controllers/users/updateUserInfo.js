@@ -12,7 +12,7 @@ const updateUserInfo = async (req, res) => {
   if (req.file) updatedUser.avatarURL = req.file.path;
 
   console.log(updatedUser);
-  const { name, email, avatarURL, birthday, phone, city } =
+  const { name, email, avatarURL, birthday, phone, location } =
     await User.findByIdAndUpdate(_id, updatedUser, {
       new: true,
       runValidators: true,
@@ -20,7 +20,9 @@ const updateUserInfo = async (req, res) => {
 
   if (!name || !email) throw httpError(404, "Not found");
 
-  res.status(201).json({ _id, name, email, avatarURL, birthday, phone, city });
+  res
+    .status(201)
+    .json({ _id, name, email, avatarURL, birthday, phone, location });
 };
 
 module.exports = updateUserInfo;

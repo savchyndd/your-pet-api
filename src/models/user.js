@@ -102,7 +102,7 @@ const updateUserSchema = Joi.object({
         "The number must be a string in the format +380671234567.",
     })
     .allow(null, ""),
-  city: Joi.string().allow(null, ""),
+  location: Joi.string().allow(null, ""),
 });
 
 const userSchemas = {

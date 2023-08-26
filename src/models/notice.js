@@ -34,7 +34,8 @@ const noticeSchema = new Schema(
     },
     type: {
       type: String,
-      match: NAME_REGEX,
+      min: [2, "Comments shoud be more 2 symbols"],
+      max: [16, "Comments shoud be less 16 symbols"],
       required: [true, "type is required"],
     },
     sex: {
