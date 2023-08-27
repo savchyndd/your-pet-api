@@ -1,7 +1,7 @@
-const { httpError } = require('../helpers');
+const { httpError } = require("../helpers");
 
-const validation = schema => {
-  const func = async (req, res, next) => {
+const validation = (schema) => {
+  const func = (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
       next(httpError(400, error.message));

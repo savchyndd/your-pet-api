@@ -2,10 +2,10 @@ const { MyPet } = require('../../models/pet');
 const { httpError, tryCatchWrapper } = require('../../helpers/index');
 
 const gravatar = require("gravatar");
-
+  
 const addMyPet = async (req, res) => {
   const { name } = req.body;
-
+const avatarURL = gravatar.url(name);
   const pet = await MyPet.findOne({ name });
   if (pet) {
     throw httpError(409, `Pet ${name} already in use`);
@@ -17,10 +17,10 @@ const addMyPet = async (req, res) => {
     ? { avatarURL: req.file.path, owner, ...req.body }
     : { owner, ...req.body };
 
-  const avatarURL = gravatar.url(name);
   
   const result = await MyPet.create({
     ...newPet,
+    owner,
     avatarURL,
   });
 

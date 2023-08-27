@@ -7,7 +7,7 @@ const addNotice = async (req, res) => {
   if (!req.body || !req.file) throw httpError(400, "Missing any field");
 
   const petAvatarURL = req.file.path;
-
+  
   console.log(petAvatarURL);
 
   const createdNotice = await Notice.create({
