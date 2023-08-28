@@ -9,14 +9,11 @@ const addPet = async (req, res) => {
 
   const petAvatarURL = req.file.path;
 
-  const createdPet = await Pet.create(
-    {
-      ...req.body,
-      petAvatarURL,
-      owner,
-    },
-    "-createdAt -updatedAt"
-  );
+  const createdPet = await Pet.create({
+    ...req.body,
+    petAvatarURL,
+    owner,
+  });
 
   res.status(201).json(createdPet);
 };
