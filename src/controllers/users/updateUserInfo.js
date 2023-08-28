@@ -1,6 +1,6 @@
-const { httpError } = require("../../helpers");
 const { User } = require("../../models");
-// const uploadAvatar = require("../../utils/uploadAvatar");
+
+const { httpError } = require("../../helpers");
 
 const updateUserInfo = async (req, res) => {
   const { _id } = req.user;
@@ -11,7 +11,6 @@ const updateUserInfo = async (req, res) => {
   if (req.body) updatedUser = { ...req.body };
   if (req.file) updatedUser.avatarURL = req.file.path;
 
-  console.log(updatedUser);
   const { name, email, avatarURL, birthday, phone, location } =
     await User.findByIdAndUpdate(_id, updatedUser, {
       new: true,
