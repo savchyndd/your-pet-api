@@ -840,12 +840,111 @@
       }
     },
     "/pet": {
+      "get": {
+        "tags": ["Pets"],
+        "summary": "Get pets by category and/or search parameters",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "PetsCategoriesNav",
+            "description": "Pets category",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "default": "sell",
+              "enum": ["sell", "lost-found", "in-good-hands"]
+            }
+          },
+          {
+            "in": "query",
+            "name": "PetsSearch",
+            "description": "pets search parameter (search by title)",
+            "schema": {
+              "type": "string",
+              "default": "empty string",
+              "example": "cat"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Current page pets (page=allPets/limit)",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1,
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "The number of pets that should be on one page",
+            "schema": {
+              "type": "number",
+              "default": 12,
+              "example": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPetResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorNotFoundResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": ["Pets"],
-        "summary": "Add animal card",
+        "summary": "Add pet card",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Pet's object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPetRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPetResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request (invalid request body)",
@@ -853,10 +952,23 @@
           },
           "401": {
             "description": "Not authorized",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorUnauthorizedResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -864,22 +976,63 @@
     "/pet/{petId}": {
       "delete": {
         "tags": ["Pets"],
-        "summary": "Removing the animal card",
+        "summary": "Removing the pet card",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "petId",
+            "required": true,
+            "description": "Pet's id",
+            "schema": {
+              "type": "string",
+              "example": "64e78e9343876cdc697e9625"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemovePetCardResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request"
           },
           "401": {
-            "description": "Not authorized"
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorUnauthorizedResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Pet with id not found"
+            "description": "Pet with id not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorNotFoundResponse"
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorServerResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -1239,7 +1392,278 @@
           "location": "Lviv"
         }
       },
-
+      "GetPetResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Pet's category",
+              "enum": ["sell", "lost/found", "in good hands"],
+              "example": "lost/found"
+            },
+            "name": {
+              "type": "string",
+              "description": "Pet's name",
+              "example": "Melany"
+            },
+            "date": {
+              "type": "string",
+              "description": "Pet's card add date",
+              "example": "21-09-2023"
+            },
+            "birthday": {
+              "type": "string",
+              "description": "Pet's birthday",
+              "example": "21-09-2023"
+            },
+            "bread": {
+              "type": "string",
+              "description": "Pet's bread",
+              "example": "Dog"
+            },
+            "sex": {
+              "type": "string",
+              "description": "Pet's sex",
+              "enum": ["male", "female"],
+              "example": "male"
+            },
+            "comments": {
+              "type": "string",
+              "description": "Notice's comments",
+              "example": "Rich would be the perfect addition to an active family that loves to play."
+            },
+            "location": {
+              "type": "string",
+              "description": "Pet's location",
+              "example": "Barnstable Town"
+            },
+            "price": {
+              "type": "number",
+              "description": "Pet's price",
+              "example": "23"
+            },
+            "title": {
+              "type": "string",
+              "description": "NPet's title",
+              "example": "Cute cat looking for a home"
+            },
+            "avatarURL": {
+              "type": "string",
+              "description": "Pet's photo link",
+              "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Owner's id",
+              "example": "534d677fcc8ea74aedaabdc1"
+            }
+          }
+        },
+        "example": [
+          {
+            "category": "sell",
+            "name": "Charlie",
+            "date": "21-09-2023",
+            "birthday": "21-09-2023",
+            "bread": "Dog",
+            "sex": "male",
+            "comments": "Rich would be the perfect addition to an active family that loves to play.",
+            "location": "Lviv",
+            "price": "40",
+            "title": "Cute pet looking for a home",
+            "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
+            "owner": "f24cf26ff2b7a80e999b8abb"
+          },
+          {
+            "category": "sell",
+            "name": "Bravo",
+            "date": "21-08-2023",
+            "birthday": "21-03-2023",
+            "bread": "Cat",
+            "sex": "female",
+            "comments": "Rich would be the perfect addition to an active family that loves to play.",
+            "location": "Kyiv",
+            "price": "50",
+            "title": "Cute pet looking for a home",
+            "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
+            "owner": "f24cf26ff2b7a80e999b8abb"
+          }
+        ]
+      },
+      "AddPetRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "date",
+          "birthday",
+          "bread",
+          "sex",
+          "location",
+          "price",
+          "title",
+          "category",
+          "comments",
+          "avatarURL",
+          "owner"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Melany"
+          },
+          "date": {
+            "type": "string",
+            "description": "Pet's card add date",
+            "example": "21-09-2023"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pet's birthday",
+            "example": "21-09-2023"
+          },
+          "bread": {
+            "type": "string",
+            "description": "Pet's bread",
+            "example": "Dog"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "enum": ["male", "female"],
+            "example": "male"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play."
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's location",
+            "example": "Barnstable Town"
+          },
+          "price": {
+            "type": "number",
+            "description": "Pet's price",
+            "example": "23"
+          },
+          "title": {
+            "type": "string",
+            "description": "NPet's title",
+            "example": "Cute cat looking for a home"
+          },
+          "category": {
+            "type": "string",
+            "description": "Pet's category",
+            "enum": ["sell", "lost/found", "in good hands"],
+            "example": "lost/found"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "Pet's photo link",
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
+          }
+        }
+      },
+      "AddPetResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Melany"
+          },
+          "date": {
+            "type": "string",
+            "description": "Pet's card add date",
+            "example": "21-09-2023"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pet's birthday",
+            "example": "21-09-2023"
+          },
+          "bread": {
+            "type": "string",
+            "description": "Pet's bread",
+            "example": "Dog"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "enum": ["male", "female"],
+            "example": "male"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Notice's comments",
+            "example": "Rich would be the perfect addition to an active family that loves to play."
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet's location",
+            "example": "Barnstable Town"
+          },
+          "price": {
+            "type": "number",
+            "description": "Pet's price",
+            "example": "23"
+          },
+          "title": {
+            "type": "string",
+            "description": "NPet's title",
+            "example": "Cute cat looking for a home"
+          },
+          "category": {
+            "type": "string",
+            "description": "Pet's category",
+            "enum": ["sell", "lost/found", "in good hands"],
+            "example": "lost/found"
+          },
+          "avatarURL": {
+            "type": "string",
+            "description": "Pet's photo link",
+            "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner's id",
+            "example": "534d677fcc8ea74aedaabdc1"
+          }
+        },
+        "example": {
+          "name": "Melany",
+          "date": "21-09-2023",
+          "birthday": "21-09-2023",
+          "bread": "Dog",
+          "sex": "male",
+          "comments": "Rich would be the perfect addition to an active family that loves to play.",
+          "location": "Barnstable Town",
+          "price": "23",
+          "title": "Cute cat looking for a home",
+          "category": "lost/found",
+          "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693047085/pets/cujdax5sgppc1g9mikdb.jpg",
+          "owner": "534d677fcc8ea74aedaabdc1"
+        }
+      },
+      "RemovePetCardResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Successful operation",
+            "example": "Pet card successfully delete"
+          }
+        }
+      },
       "GetNoticesResponse": {
         "type": "array",
         "items": {
