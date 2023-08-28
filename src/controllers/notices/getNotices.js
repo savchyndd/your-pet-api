@@ -44,9 +44,18 @@ const getNotices = async (req, res) => {
     }
   );
 
+  const totalNotices = await Notice.countDocuments({
+    category: `${searchParams.NoticesCategoriesNav}`,
+    title: {
+      $regex: `${searchParams.NoticesSearch}`,
+      $options: "i",
+    },
+  });
+  const totalPages = !totalNotices ? 1 : Math.ceil(totalNotices / limit);
+
   if (!notices) throw httpError(404, "Not Found");
 
-  res.status(200).json(notices);
+  res.status(200).json({ notices, totalPages });
 };
 
 module.exports = getNotices;

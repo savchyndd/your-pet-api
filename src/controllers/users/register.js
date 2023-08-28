@@ -2,11 +2,9 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// const gravatar = require("gravatar");
+const { User } = require("../../models");
 
 const { httpError } = require("../../helpers");
-
-const { User } = require("../../models");
 
 const { SECRET_KEY } = process.env;
 

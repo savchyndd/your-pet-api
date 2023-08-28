@@ -5,6 +5,7 @@ const CATEGORY = [
   "favorite ads",
   "my ads",
 ];
+
 const CATEGORY_FOR_PARAMS = [
   "sell",
   "lost-found",
