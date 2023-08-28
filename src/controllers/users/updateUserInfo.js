@@ -9,11 +9,10 @@ const updateUserInfo = async (req, res) => {
   if (!Object.keys(req.body).length && typeof req.file === "undefined")
     throw httpError(400, "Missing any field");
 
-  if (req.body.email) {
-    const user = await User.findOne({ email: req.body.email });
-
-    if (user) throw httpError(409, "Email in use");
-  }
+  // if (req.body.email) {
+  //   const user = await User.findOne({ email: req.body.email });
+  //   if (user) throw httpError(409, "Email in use");
+  // }
 
   if (req.body) updatedUser = { ...req.body };
   if (req.file) updatedUser.avatarURL = req.file.path;
