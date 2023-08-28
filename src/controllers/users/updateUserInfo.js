@@ -15,8 +15,7 @@ const updateUserInfo = async (req, res) => {
     if (user) throw httpError(409, "Email in use");
   }
 
-  if (req.body)
-    updatedUser = { ...req.body, email: req.body.email.toLowerCase() };
+  if (req.body) updatedUser = { ...req.body };
   if (req.file) updatedUser.avatarURL = req.file.path;
 
   const { name, email, avatarURL, birthday, phone, location } =
