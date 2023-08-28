@@ -1232,6 +1232,21 @@
                 "type": "string",
                 "description": "User's avatar link",
                 "example": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
+              },
+              "birthday": {
+                "type": "string",
+                "description": "User's birthday",
+                "example": "23-11-2023"
+              },
+              "phone": {
+                "type": "string",
+                "description": "User's phone",
+                "example": "+38099943"
+              },
+              "location": {
+                "type": "string",
+                "description": "User's location",
+                "example": "Lviv"
               }
             }
           },
@@ -1246,7 +1261,10 @@
             "_id": "3444542njnj54khbhb45bhk",
             "name": "Taras",
             "email": "Taras@gmail.com",
-            "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png"
+            "avatarURL": "https://res.cloudinary.com/dozyx4svd/image/upload/v1693037240/avatars/default_avatar.png",
+            "birthday": "23-11-2023",
+            "phone": "+38099943",
+            "location": "Lviv"
           },
           "token": "32143232436545474"
         }
