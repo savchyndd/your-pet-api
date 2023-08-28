@@ -15,19 +15,19 @@ Here are some of the key technologies and libraries used in this project:
 For detailed descriptions of API requests and interactions, refer to the: [`Your pet documentation`](https://your-pet-shw3.onrender.com/api-docs/)
 
 **User's endpoints**
-<img src="./public/images/user-endpoints.png" alt="Your pet API Documentation User endpoints" max-width="900" max-height="500" style="border-radius:5px">
+<img src="./public/images/user-endpoints.png" alt="Your pet API Documentation User endpoints" max-width="900" max-height="500">
 
 **Notice's endpoints**
-<img src="./public/images/notice-endpoints.png" alt="Your pet API Documentation Notice endpoints" max-width="900" max-height="500" style="border-radius:5px">
+<img src="./public/images/notice-endpoints.png" alt="Your pet API Documentation Notice endpoints" max-width="900" max-height="500">
 
 **Pet's endpoints**
-<img src="./public/images/pet-endpoints.png" alt="Your pet API Documentation Pet endpoints" max-width="900" max-height="500" style="border-radius:5px">
+<img src="./public/images/pet-endpoints.png" alt="Your pet API Documentation Pet endpoints" max-width="900" max-height="500">
 
 **News endpoints**
-<img src="./public/images/news-endpoints.png" alt="Your pet API Documentation News endpoints" max-width="900" max-height="500" style="border-radius:5px">
+<img src="./public/images/news-endpoints.png" alt="Your pet API Documentation News endpoints" max-width="900" max-height="500">
 
 **Sponsor's endpoints**
-<img src="./public/images/sponsor-endpoints.png" alt="Your pet API Documentation Sponsor's endpoints" max-width="900" max-height="500" style="border-radius:5px">
+<img src="./public/images/sponsor-endpoints.png" alt="Your pet API Documentation Sponsor's endpoints" max-width="900" max-height="500">
 
 ## Requirements
 
