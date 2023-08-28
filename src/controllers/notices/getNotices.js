@@ -41,7 +41,7 @@ const getNotices = async (req, res) => {
   const totalNotices = await Notice.countDocuments({
     category: `${searchParams.NoticesCategoriesNav}`,
     title: {
-      $regex: `${searchParams.NoticesSearch}`,
+      $regex: `${NoticesSearch}`,
       $options: "i",
     },
   });
