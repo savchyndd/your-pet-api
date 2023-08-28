@@ -10,15 +10,9 @@ const getNotices = async (req, res) => {
     page = 1,
     limit = 12,
     NoticesCategoriesNav = "sell",
-    NoticesSearch,
+    NoticesSearch = "",
   } = req.query;
   const skip = (page - 1) * limit;
-
-  if (typeof NoticesSearch === "undefined") {
-    searchParams.NoticesSearch = "";
-  } else {
-    searchParams.NoticesSearch = NoticesSearch;
-  }
 
   if (!CATEGORY_FOR_PARAMS.includes(NoticesCategoriesNav)) {
     searchParams.NoticesCategoriesNav = "sell";
@@ -33,7 +27,7 @@ const getNotices = async (req, res) => {
     {
       category: `${searchParams.NoticesCategoriesNav}`,
       title: {
-        $regex: `${searchParams.NoticesSearch}`,
+        $regex: `${NoticesSearch}`,
         $options: "i",
       },
     },

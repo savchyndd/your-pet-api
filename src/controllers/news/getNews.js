@@ -3,42 +3,26 @@ const { News } = require("../../models");
 const { httpError } = require("../../helpers");
 
 const getNews = async (req, res) => {
-  const searchParams = {};
-  const {
-    // page = 1,
-    // limit = 100,
-    NewsSearch,
-  } = req.query;
-  // const skip = (page - 1) * limit;
-
-  if (typeof NewsSearch === "undefined") {
-    searchParams.NewsSearch = "";
-  } else {
-    searchParams.NewsSearch = NewsSearch;
-  }
+  const { NewsSearch = "" } = req.query;
 
   const news = await News.find(
     {
       $or: [
         {
           title: {
-            $regex: `${searchParams.NewsSearch}`,
+            $regex: `${NewsSearch}`,
             $options: "i",
           },
         },
         {
           text: {
-            $regex: `${searchParams.NewsSearch}`,
+            $regex: `${NewsSearch}`,
             $options: "i",
           },
         },
       ],
     },
     "-createdAt -updatedAt"
-    // {
-    //   skip,
-    //   limit,
-    // }
   );
 
   if (!news) throw httpError(404, "Not Found");
