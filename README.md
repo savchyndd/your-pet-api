@@ -4,6 +4,13 @@
 
 This project implements the server-side component of the Your Pet application. It is built on Node.js, utilizing the Express.js framework to implement the API and Mongoose for interacting with the MongoDB database.
 
+> [![Front-End - GitHub Pages](https://img.shields.io/badge/Front--End-GitHub%20Pages-FFDD00?logo=github&labelColor=0057B7)](https://yuriypilipenkokh.github.io/your-pet-project-frontend/)  
+> [![Front-End - GitHub Repository](https://img.shields.io/badge/Front--End-GitHub%20Repository-FFDD00?logo=github&labelColor=0057B7)](https://github.com/YuriyPilipenkoKH/your-pet-project-frontend)
+
+
+> [![Back-End - Render](https://img.shields.io/badge/Back--End-Render-000000?logo=render&logoColor=ffffff&labelColor=cd0000)](https://your-pet-shw3.onrender.com/api-docs/)  
+> [![Back-End - GitHub Repository](https://img.shields.io/badge/Back--End-GitHub%20Repository-000000?logo=github&labelColor=cd0000)](https://github.com/savchyndd/your-pet-project-api)
+
 ## Technologies Used
 
 Here are some of the key technologies and libraries used in this project:
