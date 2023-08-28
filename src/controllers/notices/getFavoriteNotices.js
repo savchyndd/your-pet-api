@@ -4,12 +4,16 @@ const { httpError } = require("../../helpers");
 
 const getFavoriteNotices = async (req, res) => {
   const { _id: userAddedFavorite } = req.user;
-  const { page = 1, limit = 12 } = req.query;
+  const { page = 1, limit = 12, NoticesSearch = "" } = req.query;
   const skip = (page - 1) * limit;
 
   const favoriteNotices = await Notice.find(
     {
       idUsersAddedFavorite: userAddedFavorite,
+      title: {
+        $regex: `${NoticesSearch}`,
+        $options: "i",
+      },
     },
     "-createdAt -updatedAt",
     {
@@ -20,6 +24,10 @@ const getFavoriteNotices = async (req, res) => {
 
   const totalNotices = await Notice.countDocuments({
     idUsersAddedFavorite: userAddedFavorite,
+    title: {
+      $regex: `${NoticesSearch}`,
+      $options: "i",
+    },
   });
   const totalPages = !totalNotices ? 1 : Math.ceil(totalNotices / limit);
 

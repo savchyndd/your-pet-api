@@ -493,6 +493,16 @@
               "default": 12,
               "example": 12
             }
+          },
+          {
+            "in": "query",
+            "name": "NoticesSearch",
+            "description": "Notices search parameter (search by title)",
+            "schema": {
+              "type": "string",
+              "default": "empty string",
+              "example": "cat"
+            }
           }
         ],
         "responses": {
@@ -795,6 +805,16 @@
               "type": "number",
               "default": 12,
               "example": 12
+            }
+          },
+          {
+            "in": "query",
+            "name": "NoticesSearch",
+            "description": "Notices search parameter (search by title)",
+            "schema": {
+              "type": "string",
+              "default": "empty string",
+              "example": "cat"
             }
           }
         ],
