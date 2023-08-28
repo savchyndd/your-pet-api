@@ -8,8 +8,10 @@ const { httpError } = require("../../helpers");
 const { SECRET_KEY } = process.env;
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const { _id, name, email, avatarURL, birthday, phone, location } = req.user;
+
+  const { userEmail, password } = req.body;
+  const user = await User.findOne({ userEmail });
   if (!user) throw httpError(401, "Email or password is wrong");
 
   const passCompare = await bcrypt.compare(password, user.password);
@@ -21,12 +23,7 @@ const login = async (req, res) => {
   await User.findOneAndUpdate(user._id, { token });
   res.json({
     token,
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      avatarURL: user.avatarURL,
-    },
+    user: { _id, name, email, avatarURL, birthday, phone, location },
   });
 };
 
