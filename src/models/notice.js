@@ -73,8 +73,18 @@ const noticeSchema = new Schema(
       required: isHasRequireCategory(this.category, "price"),
     },
     owner: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
+      _id: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      email: {
+        type: String,
+        ref: "users",
+      },
+      phone: {
+        type: String,
+        ref: "users",
+      },
     },
     idUsersAddedFavorite: [
       {

@@ -18,9 +18,14 @@ const getOwnerNotices = async (req, res) => {
     }
   );
 
+  const totalNotices = await Notice.countDocuments({
+    owner,
+  });
+  const totalPages = !totalNotices ? 1 : Math.ceil(totalNotices / limit);
+
   if (!ownerNotices) throw httpError(404, "Not Found");
 
-  res.status(200).json(ownerNotices);
+  res.status(200).json({ notices: ownerNotices, totalPages });
 };
 
 module.exports = getOwnerNotices;

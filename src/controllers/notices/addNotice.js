@@ -3,7 +3,8 @@ const { Notice } = require("../../models");
 const { httpError } = require("../../helpers");
 
 const addNotice = async (req, res) => {
-  const { _id: owner } = req.user;
+  const { _id, email, phone } = req.user;
+  const owner = { _id, email, phone };
 
   if (!req.body || !req.file) throw httpError(400, "Missing any field");
 

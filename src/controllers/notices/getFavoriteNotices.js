@@ -18,9 +18,14 @@ const getFavoriteNotices = async (req, res) => {
     }
   );
 
+  const totalNotices = await Notice.countDocuments({
+    idUsersAddedFavorite: userAddedFavorite,
+  });
+  const totalPages = !totalNotices ? 1 : Math.ceil(totalNotices / limit);
+
   if (!favoriteNotices) throw httpError(404, "Not Found");
 
-  res.status(200).json(favoriteNotices);
+  res.status(200).json({ notices: favoriteNotices, totalPages });
 };
 
 module.exports = getFavoriteNotices;
