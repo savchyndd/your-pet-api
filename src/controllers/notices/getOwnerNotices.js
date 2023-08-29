@@ -3,7 +3,13 @@ const { Notice } = require("../../models");
 const { httpError } = require("../../helpers");
 
 const getOwnerNotices = async (req, res) => {
-  const { _id: owner } = req.user;
+  const { _id, email, phone } = req.user;
+  const owner = {
+    _id,
+    email,
+    phone,
+  };
+
   const { page = 1, limit = 12, NoticesSearch = "" } = req.query;
   const skip = (page - 1) * limit;
 
