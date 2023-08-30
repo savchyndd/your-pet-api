@@ -19,6 +19,7 @@ const getFavoriteNotices = async (req, res) => {
     {
       skip,
       limit,
+      sort: { createdAt: -1 },
     }
   );
 
